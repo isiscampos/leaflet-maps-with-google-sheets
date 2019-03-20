@@ -63,7 +63,8 @@ $(window).on('load', function() {
 
 
   /**
-   * Given a collection of points, determines the layers based on 'Group'
+   * Given a collection of points, determines the layers 
+   d on 'Group'
    * column in the spreadsheet.
    */
   function determineLayers(points) {
@@ -918,10 +919,9 @@ $(window).on('load', function() {
    * Loads the basemap and adds it to the map
    */
   function addBaseMap() {
-    var basemap = trySetting('_tileProvider', 'Esri.WorldImagery');
-    L.tileLayer.provider('Esri.WorldImagery', {
-      maxZoom: 18
-    }).addTo(map);
+    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});.addTo(map);
     L.control.attribution({
       position: trySetting('_mapAttribution', 'bottomright')
     }).addTo(map);
