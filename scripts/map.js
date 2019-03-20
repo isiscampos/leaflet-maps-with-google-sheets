@@ -919,7 +919,7 @@ $(window).on('load', function() {
    */
   function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'Esri.WorldImagery');
-    L.tileLayer.provider(basemap, {
+    L.tileLayer.provider('Esri.WorldImagery', {
       maxZoom: 18
     }).addTo(map);
     L.control.attribution({
