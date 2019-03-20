@@ -138,24 +138,25 @@ $(window).on('load', function() {
       }
     }
 
-   var markerClusters = L.markerClusterGroup();
- 
-for ( var i = 0; i < markers.length; ++i )
-{
-  var popup = markers[i].name +
-              '<br/>' + markers[i].city +
-              '<br/><b>IATA/FAA:</b> ' + markers[i].iata_faa +
-              '<br/><b>ICAO:</b> ' + markers[i].icao +
-              '<br/><b>Altitude:</b> ' + Math.round( markers[i].alt * 0.3048 ) + ' m' +
-              '<br/><b>Timezone:</b> ' + markers[i].tz;
- 
-  var m = L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
-                  .bindPopup( popup );
- 
-  markerClusters.addLayer( m );
-}
- 
-map.addLayer( markerClusters );
+    var group = L.featureGroup(markerArray);
+    var clusters = (getSetting('_markercluster') === 'on') ? true : false;
+
+    // if layers.length === 0, add points to map instead of layer
+    if (layers === undefined || layers.length === 0) {
+      map.addLayer(
+        clusters
+        ? L.markerClusterGroup().addLayer(group).addTo(map)
+        : group
+      );
+    } else {
+      if (clusters) {
+        // Add multilayer cluster support
+        multilayerClusterSupport = L.markerClusterGroup.layerSupport();
+        multilayerClusterSupport.addTo(map);
+
+        for (i in layers) {
+          multilayerClusterSupport.checkIn(layers[i]);
+          layers[i].addTo(map);
         }
       }
 
