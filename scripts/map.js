@@ -918,11 +918,14 @@ $(window).on('load', function() {
   /**
    * Loads the basemap and adds it to the map
    */
- L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
- attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
- subdomains: ['a','b','c']
-}).addTo( map );
-
+ function addBaseMap() {
+    var basemap = trySetting('_tileProvider', 'CartoDB.Positron');
+    L.tileLayer.provider(basemap, {
+      maxZoom: 18
+    }).addTo(map);
+    L.control.attribution({
+      position: trySetting('_mapAttribution', 'bottomright')
+    }).addTo(map);
   /**
    * Returns the value of a setting s
    * getSetting(s) is equivalent to documentSettings[constants.s]
