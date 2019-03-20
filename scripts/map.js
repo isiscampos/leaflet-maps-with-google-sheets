@@ -918,14 +918,10 @@ $(window).on('load', function() {
   /**
    * Loads the basemap and adds it to the map
    */
-  function addBaseMap() {
-    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-});.addTo(map);
-    L.control.attribution({
-      position: trySetting('_mapAttribution', 'bottomright')
-    }).addTo(map);
-  }
+ L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+ subdomains: ['a','b','c']
+}).addTo( map );
 
   /**
    * Returns the value of a setting s
