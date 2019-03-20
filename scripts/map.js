@@ -63,8 +63,7 @@ $(window).on('load', function() {
 
 
   /**
-   * Given a collection of points, determines the layers 
-   d on 'Group'
+   * Given a collection of points, determines the layers based on 'Group'
    * column in the spreadsheet.
    */
   function determineLayers(points) {
@@ -914,10 +913,11 @@ $(window).on('load', function() {
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
 
- /**
+
+  /**
    * Loads the basemap and adds it to the map
    */
- function addBaseMap() {
+  function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'CartoDB.Positron');
     L.tileLayer.provider(basemap, {
       maxZoom: 18
@@ -925,9 +925,9 @@ $(window).on('load', function() {
     L.control.attribution({
       position: trySetting('_mapAttribution', 'bottomright')
     }).addTo(map);
- }
-   
-   /**
+  }
+
+  /**
    * Returns the value of a setting s
    * getSetting(s) is equivalent to documentSettings[constants.s]
    */
